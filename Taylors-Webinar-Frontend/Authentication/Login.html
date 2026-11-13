@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Taylor's Webinar & Guest Speaker Hub</title>
+
+    <link rel="stylesheet" href="../assets/css/Login.css">
+    <script src="../assets/js/Login.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="brand">
+                <img
+                    src="../assets/images/logo.png"
+                    alt="Taylor's University Logo"
+                    class="brand-logo"
+                >
+
+                <div class="brand-text">
+                    <span class="brand-name">Taylor’s</span>
+                    <span class="brand-subtitle">
+                        WEBINAR &amp; GUEST SPEAKER HUB
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+        <section class="intro">
+            <p class="intro-label">GOOD TIMES START HERE</p>
+
+            <h1>Discover. Learn. Connect.</h1>
+
+            <p class="intro-description">
+                Join Taylor’s Webinar &amp; Guest Speaker Hub to discover
+                exciting talks and events.
+            </p>
+        </section>
+
+        <!-- Login card -->
+        <section class="login-card">
+            <h2>Login</h2>
+
+            <p class="card-description">
+                Welcome back. Pick up where you left off.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="alex.morgan@sd.taylors.edu.my"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            data-target="password"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M10.58 10.59a2 2 0 0 0 2.83 2.82"/>
+                                <path d="M9.88 5.09A10.94 10.94 0 0 1 12 4.9c5 0 9 4.6 10 7.1a13.7 13.7 0 0 1-3.1 4.1"/>
+                                <path d="M6.6 6.6C3.8 8.1 2.4 10.6 2 12c1 2.5 5 7.1 10 7.1a10.4 10.4 0 0 0 5.4-1.5"/>
+                                <path d="M3 3l18 18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input
+                            type="checkbox"
+                            id="remember-me"
+                            name="remember_me"
+                        >
+                        <span>Remember me</span>
+                    </label>
+
+                    <a href="#" class="forgot-password">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+
+                <button type="button" class="admin-button">
+                    Admin
+                </button>
+
+                <p class="signup-prompt">
+                    Don’t have account?
+                    <a href="Signup.html">Sign Up</a>
+                </p>
+
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>
+                © 2026 Taylor's Webinar &amp; Guest Speaker Hub
+            </p>
+
+            <div class="footer-links">
+                <a href="#">Privacy policy</a>
+                <a href="#">Terms of use</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

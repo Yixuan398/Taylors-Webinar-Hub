@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Events | Taylor's Webinar & Guest Speaker Hub</title>
+    <link rel="stylesheet" href="../assets/css/Browse_Events.css">
+    <script src="../assets/js/Browse_Events.js" defer></script>
+</head>
+<body>
+    
+        <!-- Header -->
+        <header class="site-header">
+            <div class="header-content">
+                <a href="Home.html" class="brand">
+                    <img src="../assets/images/logo.png"
+                        alt="Taylor's University Logo"
+                        class="brand-logo">
+
+                    <div class="brand-text">
+                        <span class="brand-name">Taylor’s</span>
+                        <span class="brand-subtitle">WEBINAR &amp; GUEST SPEAKER HUB</span>
+                    </div>
+                </a>
+
+                <nav class="header-nav">
+                    <a href="../Student-Portal/My_Events.html" class="my-events-link">
+                        My Events
+                    </a>
+
+                    <a href="../Student-Portal/User_Profile.html" class="user-profile">
+                        <span class="user-avatar">AL</span>
+                        <span class="user-name">Alex Lee</span>
+
+                        <svg class="chevron-icon" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </a>
+
+                    <a href="../Authentication/Login.html" class="logout-link">
+                        Log out
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+        <!-- Page Introduction -->
+        <section class="page-intro">
+            <p class="eyebrow">MAKE MORE OF CAMPUS LIFE</p>
+
+            <h1>Browse Events</h1>
+
+            <div class="intro-bottom">
+                <p>Find your people. Try something new. There’s a place for you here.</p>
+
+                <div class="campus-location">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="2.5"/>
+                    </svg>
+                    <span>Taylor’s Lakeside Campus</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="search-section">
+            <form id="searchForm" class="search-form">
+
+                <div class="search-input-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.7"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7"/>
+                        <path d="m20 20-4-4"/>
+                    </svg>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search events by name or description"
+                        aria-label="Search events"
+                    >
+                </div>
+
+                <select id="categoryFilter" aria-label="Filter by category">
+                    <option value="all">All categories</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Arts & Culture">Arts &amp; Culture</option>
+                    <option value="Community">Community</option>
+                    <option value="Sports & Wellness">Sports &amp; Wellness</option>
+                </select>
+
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </section>
+
+        <!-- Events Listing -->
+        <section class="events-section">
+
+            <div class="events-heading">
+                <div class="heading-left">
+                    <h2>Coming up on campus</h2>
+                    <span class="events-count" id="eventsCount">5 events</span>
+                </div>
+
+                <div class="sort-wrapper">
+                    <label for="sortSelect">Sort by:</label>
+                    <select id="sortSelect">
+                        <option value="soonest">Soonest first</option>
+                        <option value="latest">Latest first</option>
+                        <option value="az">Name A–Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="events-grid" id="eventsGrid">
+
+                <!-- Event 1 -->
+                <article class="event-card"
+                         data-title="Build Together: Campus Hackathon"
+                         data-category="Technology"
+                         data-date="2026-11-06"
+                         data-description="Campus hackathon coding innovation collaboration">
+
+                    <span class="category-tag technology">Technology</span>
+
+                    <h3>Build Together: Campus Hackathon</h3>
+
+                    <div class="event-meta">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            </svg>
+                            <span>Fri, 6 Nov 2026 · 9:00 AM – 6:00 PM</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span>Innovation Lab, Block E</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"/>
+                                <path d="M3 20v-2a6 6 0 0 1 12 0v2"/>
+                                <path d="M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/>
+                            </svg>
+                            <span>Taylor's Computing Society</span>
+                        </div>
+                    </div>
+
+                    <a href="Event_Details.html?id=4" class="details-button">
+                        <span>View Details</span>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 19 19 5"/>
+                            <path d="M9 5h10v10"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Event 2 -->
+                <article class="event-card"
+                         data-title="Lakeside Sessions: Open Mic Night"
+                         data-category="Arts & Culture"
+                         data-date="2026-11-07"
+                         data-description="Music open mic night performance arts culture">
+
+                    <span class="category-tag arts">Arts &amp; Culture</span>
+
+                    <h3>Lakeside Sessions: Open Mic Night</h3>
+
+                    <div class="event-meta">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            </svg>
+                            <span>Sat, 7 Nov 2026 · 7:00 PM – 10:00 PM</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span>Lakeside Amphitheatre</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"/>
+                                <path d="M3 20v-2a6 6 0 0 1 12 0v2"/>
+                                <path d="M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/>
+                            </svg>
+                            <span>Taylor's Music Club</span>
+                        </div>
+                    </div>
+
+                    <a href="Event_Details.html?id=5" class="details-button">
+                        <span>View Details</span>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 19 19 5"/>
+                            <path d="M9 5h10v10"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Event 3 -->
+                <article class="event-card"
+                         data-title="Grow a Greener Campus"
+                         data-category="Community"
+                         data-date="2026-11-08"
+                         data-description="Sustainability community gardening greener campus environment">
+
+                    <span class="category-tag community">Community</span>
+
+                    <h3>Grow a Greener Campus</h3>
+
+                    <div class="event-meta">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            </svg>
+                            <span>Sun, 8 Nov 2026 · 8:30 AM – 12:00 PM</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span>Community Garden, Block D</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"/>
+                                <path d="M3 20v-2a6 6 0 0 1 12 0v2"/>
+                                <path d="M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/>
+                            </svg>
+                            <span>Taylor's Eco Society</span>
+                        </div>
+                    </div>
+
+                    <a href="Event_Details.html?id=6" class="details-button">
+                        <span>View Details</span>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 19 19 5"/>
+                            <path d="M9 5h10v10"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Event 4 -->
+                <article class="event-card"
+                         data-title="Sunset Run: Lakeside 5K"
+                         data-category="Sports & Wellness"
+                         data-date="2026-11-11"
+                         data-description="Running sports wellness fitness lakeside 5K">
+
+                    <span class="category-tag sports">Sports &amp; Wellness</span>
+
+                    <h3>Sunset Run: Lakeside 5K</h3>
+
+                    <div class="event-meta">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            </svg>
+                            <span>Wed, 11 Nov 2026 · 5:30 PM – 7:00 PM</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span>Lakeside Boardwalk</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"/>
+                                <path d="M3 20v-2a6 6 0 0 1 12 0v2"/>
+                                <path d="M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/>
+                            </svg>
+                            <span>Taylor's Running Club</span>
+                        </div>
+                    </div>
+
+                    <a href="Event_Details.html?id=7" class="details-button">
+                        <span>View Details</span>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 19 19 5"/>
+                            <path d="M9 5h10v10"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Event 5 -->
+                <article class="event-card"
+                         data-title="A Taste of Home: Campus Food Fair"
+                         data-category="Arts & Culture"
+                         data-date="2026-11-13"
+                         data-description="Campus food fair international food culture community">
+
+                    <span class="category-tag arts">Arts &amp; Culture</span>
+
+                    <h3>A Taste of Home: Campus Food Fair</h3>
+
+                    <div class="event-meta">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                            </svg>
+                            <span>Fri, 13 Nov 2026 · 11:00 AM – 3:00 PM</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span>Student Life Centre, Grand Hall</span>
+                        </div>
+
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.7"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"/>
+                                <path d="M3 20v-2a6 6 0 0 1 12 0v2"/>
+                                <path d="M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/>
+                            </svg>
+                            <span>Taylor's International Society</span>
+                        </div>
+                    </div>
+
+                    <a href="Event_Details.html?id=8" class="details-button">
+                        <span>View Details</span>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 19 19 5"/>
+                            <path d="M9 5h10v10"/>
+                        </svg>
+                    </a>
+                </article>
+
+            </div>
+
+            <p id="noResults" class="no-results" hidden>
+                No events found. Try another search or category.
+            </p>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>© 2026 Taylor’s Webinar &amp; Guest Speaker Hub</span>
+
+            <div class="footer-links">
+                <a href="#">Privacy policy</a>
+                <a href="#">Terms of use</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
