@@ -290,3 +290,8 @@ a {
         font-size: 26px;
     }
 }
+
+    #signupForm input::placeholder {
+        color: #9ca3af !important;
+        opacity: 1;
+    }
