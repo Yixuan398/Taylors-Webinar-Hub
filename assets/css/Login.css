@@ -371,3 +371,8 @@ body {
         gap: 20px;
     }
 }
+
+    #loginForm input::placeholder {
+        color: #9ca3af !important;
+        opacity: 1;
+    }
