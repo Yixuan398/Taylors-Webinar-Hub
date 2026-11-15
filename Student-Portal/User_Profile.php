@@ -38,7 +38,7 @@ $initials = strtoupper(
                 <a href="My_Events.php" class="my-events-link">My Events</a>
 
                 <a href="User_Profile.php" class="user-profile-link">
-                    <span class="header-avatar">AL</span>
+                    <span class="header-avatar"><?= htmlspecialchars(strtoupper(implode('', array_map(fn($part) => substr($part, 0, 1), array_slice(preg_split('/\s+/', trim($user['full_name'])), 0, 2))))) ?></span>
                     <span class="user-name"><?= e($user['full_name']) ?></span>
 
                     <svg class="chevron-icon" viewBox="0 0 24 24"
