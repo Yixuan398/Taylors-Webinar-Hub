@@ -70,8 +70,8 @@ $paragraphs = array_filter(array_map('trim', explode("\n", $event['description']
                     </a>
 
                     <a href="../Student-Portal/User_Profile.php" class="user-profile">
-                        <span class="user-avatar">AL</span>
-                        <span class="user-name">Alex Lee</span>
+                        <span class="user-avatar"><?= htmlspecialchars(strtoupper(implode('', array_map(fn($part) => substr($part, 0, 1), array_slice(preg_split('/\s+/', trim($user['full_name'])), 0, 2))))) ?></span>
+                        <span class="user-name"><?= htmlspecialchars($user['full_name']) ?></span>
 
                         <svg class="chevron-icon" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor"
