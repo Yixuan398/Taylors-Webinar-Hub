@@ -1,8 +1,52 @@
-# Taylor's Webinar & Guest Speaker Hub — Full Stack (HTML/CSS/JS + PHP + MySQL)
+# Taylor's Webinar & Guest Speaker Hub
 
-An event management web application for Taylor's University. Students can register,
-log in, browse and join events; admins can create, edit, publish/unpublish and
-delete events. Built with HTML, CSS, JavaScript, PHP (PDO) and MySQL/SQLite.
+ITS64504 Web Application Programming — Group Assignment
+
+An event management web application for Taylor's University. Students can
+register, log in, browse and join events; admins can create, edit,
+publish/unpublish and delete events. Built with **HTML, CSS, JavaScript,
+PHP (PDO) and MySQL**.
+
+## How to run it locally (MAMP / XAMPP)
+
+### 1. Get the code
+
+```bash
+git clone https://github.com/Yixuan398/Taylors-Webinar-Hub.git
+```
+
+Or download ZIP: green **Code** button → **Download ZIP**, then unzip.
+
+### 2. Put it in your web server folder
+
+- **MAMP**: move the folder to `/Applications/MAMP/htdocs/`
+- **XAMPP**: move it to `xampp/htdocs/`
+
+### 3. Create the database
+
+1. Start Apache and MySQL
+2. Open phpMyAdmin (`http://localhost:8888/phpMyAdmin` on MAMP,
+   `http://localhost/phpmyadmin` on XAMPP)
+3. Click **Import** → choose `database/schema.sql` → **Go**
+4. You should now see the `taylors_webinar_hub` database with 3 tables
+
+### 4. Create your local config
+
+```bash
+cp config/config.example.php config/config.php
+```
+
+Open `config/config.php` and adjust for your setup:
+- MAMP: `DB_PORT` = `8889`, `DB_PASS` = `'root'`
+- XAMPP: `DB_PORT` = `3306`, `DB_PASS` = `''`
+
+> `config.php` is in `.gitignore` on purpose — it holds your local
+> credentials and is never uploaded. Everyone keeps their own copy.
+
+### 5. Open the app
+
+`http://localhost:8888/Taylors-Webinar-Hub/Authentication/Login.php`
+(adjust port to your Apache port)
 
 ## Demo accounts
 
@@ -14,6 +58,20 @@ delete events. Built with HTML, CSS, JavaScript, PHP (PDO) and MySQL/SQLite.
 The login page also has an **Admin** one-click button that signs in the demo
 admin account.
 
+## Features
+
+**Students**
+- Sign up, log in, log out (session-based authentication)
+- Browse published events with live search, category filter and sorting
+- View event details with real-time capacity tracking
+- Join / leave events (capacity-checked, duplicate-safe)
+- "My Events" page with upcoming/past tabs and a live calendar
+- Edit profile and change password
+
+**Admins**
+- Dashboard listing all events with status filters and search
+- Create, edit, publish/unpublish and delete events
+- See registration counts per event
 ## Setup with XAMPP (MySQL — recommended for the demo)
 
 1. Copy the `Taylors-Webinar` folder into `xampp/htdocs/`.
