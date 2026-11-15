@@ -1,0 +1,49 @@
+/* backend.css — styles for the PHP-driven elements (flash messages, RSVP, admin forms) */
+
+.form-message {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.form-message.success {
+    background: #e8f5ec;
+    color: #1f6b3a;
+    border: 1px solid #bfe3cc;
+}
+
+.form-message.error {
+    background: #fdecea;
+    color: #a12a1d;
+    border: 1px solid #f5c6c0;
+}
+
+/* Join / leave button on the event details page */
+.rsvp-form {
+    margin-top: 1rem;
+}
+
+.rsvp-button {
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.7rem 1.4rem;
+    text-decoration: none;
+}
+
+.rsvp-button.leave {
+    background: #a12a1d;
+    color: #fff;
+}
+
+.rsvp-button[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Admin table action forms sit inline with the Edit link */
+.row-actions form {
+    display: inline;
+}

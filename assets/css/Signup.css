@@ -1,0 +1,292 @@
+/* Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #faf8f5;
+    --white: #ffffff;
+    --text: #262626;
+    --muted: #777777;
+    --border: #e5e1dd;
+    --red: #b52332;
+    --blue: #3366ff;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Header */
+.site-header {
+    width: 100%;
+    height: 90px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 4.6%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    background: #d32f2f;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    color: #555555;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+/* Main */
+.main-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 74px 20px 128px;
+}
+
+/* Introduction */
+.intro {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 34px;
+}
+
+.eyebrow {
+    color: #cf2634;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 13px;
+}
+
+.intro h1 {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.6px;
+    margin-bottom: 15px;
+}
+
+.intro-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+/* Sign Up Card */
+.signup-card {
+    width: 100%;
+    max-width: 486px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 28px 28px 84px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.025);
+}
+
+.signup-card h2 {
+    font-size: 29px;
+    font-weight: 400;
+    margin-bottom: 13px;
+}
+
+/* Form Fields */
+.form-group {
+    margin-bottom: 13px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #fdfcfb;
+    padding: 0 12px;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #333333;
+    opacity: 1;
+}
+
+.form-group input:focus {
+    border-color: var(--red);
+}
+
+/* Password Fields */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 46px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #aaa6a2;
+    font-size: 20px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+}
+
+/* Create Account Button */
+.create-button {
+    width: 100%;
+    height: 46px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 8px;
+    background: var(--red);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    background: #9e1e2b;
+}
+
+/* Login Link */
+.login-link {
+    margin-top: 17px;
+    font-size: 15px;
+    color: #343c50;
+}
+
+.login-link a {
+    color: var(--blue);
+    margin-left: 5px;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.site-footer {
+    width: 100%;
+    min-height: 80px;
+    border-top: 1px solid var(--border);
+    padding: 25px 2.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--background);
+}
+
+.site-footer p,
+.footer-links a {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.footer-links {
+    display: flex;
+    gap: 28px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .site-header {
+        height: 76px;
+        padding: 0 20px;
+    }
+
+    .main-content {
+        padding: 55px 16px 85px;
+    }
+
+    .intro h1 {
+        font-size: 32px;
+    }
+
+    .intro-description {
+        font-size: 14px;
+    }
+
+    .signup-card {
+        padding: 26px 22px 55px;
+    }
+
+    .site-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 420px) {
+    .intro h1 {
+        font-size: 27px;
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+
+    .brand-subtitle {
+        font-size: 9px;
+    }
+
+    .signup-card h2 {
+        font-size: 26px;
+    }
+}
