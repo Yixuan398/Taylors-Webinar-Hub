@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $name            = trim($_POST['name'] ?? '');
 $email           = trim($_POST['email'] ?? '');
 $password        = $_POST['password'] ?? '';
-$confirmPassword = $_POST['confirm-password'] ?? '';
+$confirmPassword = $_POST['confirm_password'] ?? '';
 
 // ---- Server-side validation ----
 if ($name === '' || $email === '' || $password === '') {
