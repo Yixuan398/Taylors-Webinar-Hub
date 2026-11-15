@@ -146,9 +146,9 @@ function render_event_card(array $event): void
                 <a href="My_Events.php" class="my-events-link">My Events</a>
 
                 <a href="User_Profile.php" class="user-profile">
-                    <span class="user-avatar">AL</span>
-                    <span class="user-name">Alex Lee</span>
-
+                    <span class="user-avatar"><?= htmlspecialchars(strtoupper(implode('', array_map(fn($part) => substr($part, 0, 1), array_slice(preg_split('/\s+/', trim($user['full_name'])), 0, 2))))) ?></span>
+                    <span class="user-name"><?= htmlspecialchars($user['full_name']) ?></span>
+                    
                     <svg class="chevron-icon" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor"
                          stroke-width="1.7" stroke-linecap="round"
