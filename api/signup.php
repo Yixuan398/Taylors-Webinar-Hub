@@ -9,6 +9,7 @@ require_once __DIR__ . '/../includes/auth.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('../Authentication/Signup.php');
 }
+require_valid_csrf();
 
 $name            = trim($_POST['name'] ?? '');
 $email           = trim($_POST['email'] ?? '');
@@ -60,6 +61,7 @@ $stmt = db()->prepare(
 $stmt->execute([$name, $email, $hash, 'student', $firstName, $lastName]);
 
 // Log the new user in straight away
+session_regenerate_id(true);
 $_SESSION['user_id'] = (int) db()->lastInsertId();
 
 flash_set('home_notice', 'Welcome, ' . $name . '! Your account is ready.');
