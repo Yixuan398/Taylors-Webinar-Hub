@@ -1,3 +1,5 @@
 .DS_Store
 database/*.sqlite
 config/config.php
+assets/uploads/*
+!assets/uploads/.htaccess
