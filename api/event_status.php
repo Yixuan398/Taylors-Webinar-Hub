@@ -8,8 +8,13 @@ require_once __DIR__ . '/../includes/auth.php';
 
 require_admin();
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect('../Admin-Management/Dashboard.php');
+}
+require_valid_csrf();
+
 $eventId = (int) ($_POST['event_id'] ?? 0);
-$status  = $_POST['status'] === 'published' ? 'published' : 'draft';
+$status  = ($_POST['status'] ?? '') === 'published' ? 'published' : 'draft';
 
 if ($eventId > 0) {
     $stmt = db()->prepare('UPDATE events SET status = ? WHERE id = ?');
