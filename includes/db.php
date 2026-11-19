@@ -48,6 +48,20 @@ function initialise_sqlite(PDO $pdo): void
     )->fetchColumn();
 
     if ($exists) {
+        $columns = $pdo->query('PRAGMA table_info(users)')->fetchAll();
+        $columnNames = array_column($columns, 'name');
+        $academicColumns = [
+            'student_id' => 'TEXT',
+            'faculty' => 'TEXT',
+            'intake' => 'TEXT',
+            'programme' => 'TEXT',
+            'year_of_study' => 'TEXT',
+        ];
+        foreach ($academicColumns as $name => $type) {
+            if (!in_array($name, $columnNames, true)) {
+                $pdo->exec("ALTER TABLE users ADD COLUMN {$name} {$type}");
+            }
+        }
         return; // already initialised
     }
 
@@ -63,6 +77,11 @@ function initialise_sqlite(PDO $pdo): void
             date_of_birth TEXT,
             mobile_number TEXT,
             photo         TEXT,
+            student_id    TEXT,
+            faculty       TEXT,
+            intake        TEXT,
+            programme     TEXT,
+            year_of_study TEXT,
             created_at    TEXT DEFAULT CURRENT_TIMESTAMP
         );
         CREATE TABLE events (
@@ -90,11 +109,11 @@ function initialise_sqlite(PDO $pdo): void
         );
     ");
 
-    // Seed demo accounts (passwords: Admin@123 / Student@123)
+    // Seed demo accounts; the seeded admin password must be rotated before deployment.
     $pdo->exec("
-        INSERT INTO users (full_name, email, password_hash, role, first_name, last_name, date_of_birth, mobile_number) VALUES
-        ('Hub Administrator', 'admin@taylors.edu.my', '\$2b\$10\$O4a9HH8b3aQ3RkQ04C4YDOeFR9GmBcUT52HUeFA3W8jLzPSYErKVO', 'admin', 'Hub', 'Administrator', NULL, '+60 12-000 0000'),
-        ('Alex Morgan', 'alex.morgan@sd.taylors.edu.my', '\$2b\$10\$8vRQnvzxHL19OUyPOIWTO.GtBS.IKJ5E.RcKYqtNnVUsZtJntRS2a', 'student', 'Alex', 'Morgan', '2003-05-14', '+60 12-345 6789');
+        INSERT INTO users (full_name, email, password_hash, role, first_name, last_name, date_of_birth, mobile_number, student_id, faculty, intake, programme, year_of_study) VALUES
+        ('Hub Administrator', 'admin@taylors.edu.my', '\$2b\$10\$O4a9HH8b3aQ3RkQ04C4YDOeFR9GmBcUT52HUeFA3W8jLzPSYErKVO', 'admin', 'Hub', 'Administrator', NULL, '+60 12-000 0000', NULL, NULL, NULL, NULL, NULL),
+        ('Alex Morgan', 'alex.morgan@sd.taylors.edu.my', '\$2b\$10\$8vRQnvzxHL19OUyPOIWTO.GtBS.IKJ5E.RcKYqtNnVUsZtJntRS2a', 'student', 'Alex', 'Morgan', '2003-05-14', '+60 12-345 6789', '123456', 'School of Computing', 'September 2025', 'Bachelor of Computer Science (Hons)', 'Year 2');
         INSERT INTO events (title, category, description, event_date, start_time, end_time, venue, organiser, capacity, status, created_by) VALUES
         ('Build Together: Campus Hackathon', 'Technology', 'A full-day hackathon where student teams prototype solutions for campus life. Mentors from industry will guide you from idea to pitch.', '2026-11-06', '09:00:00', '18:00:00', 'Innovation Lab, Block E', 'Taylor''s Computing Society', 120, 'published', 1),
         ('Lakeside Sessions: Open Mic Night', 'Arts & Culture', 'An evening of live music, poetry and stand-up by Taylor''s students, right by the lakeside. Sign up on arrival to perform.', '2026-11-07', '19:00:00', '22:00:00', 'Lakeside Amphitheatre', 'Taylor''s Arts Society', 200, 'published', 1),
