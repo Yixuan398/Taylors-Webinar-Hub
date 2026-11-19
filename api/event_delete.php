@@ -8,6 +8,11 @@ require_once __DIR__ . '/../includes/auth.php';
 
 require_admin();
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect('../Admin-Management/Dashboard.php');
+}
+require_valid_csrf();
+
 $eventId = (int) ($_POST['event_id'] ?? 0);
 
 if ($eventId > 0) {
