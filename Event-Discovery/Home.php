@@ -24,7 +24,6 @@ $posters = ['event_ai.png', 'event_career.png', 'event_marketing.png'];
     <title>Home | Taylor's Webinar & Guest Speaker Hub</title>
     <link rel="stylesheet" href="../assets/css/Home.css">
     <link rel="stylesheet" href="../assets/css/backend.css">
-    <script src="../assets/js/Home.js" defer></script>
 </head>
 <body>
 
@@ -62,9 +61,10 @@ $posters = ['event_ai.png', 'event_career.png', 'event_marketing.png'];
                         </svg>
                     </a>
 
-                    <a href="../api/logout.php" class="logout-link">
-                        Log out
-                    </a>
+                    <form method="post" action="../api/logout.php" class="logout-form">
+                        <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                        <button type="submit" class="logout-link">Log out</button>
+                    </form>
                 </nav>
             </div>
         </header>
@@ -84,15 +84,13 @@ $posters = ['event_ai.png', 'event_career.png', 'event_marketing.png'];
                     <p class="form-message success"><?= e($notice) ?></p>
                 <?php endif; ?>
 
-                <?php // "Last login" is passed from a cookie via the session (see api/login.php) ?>
                 <?php if (!empty($_SESSION['previous_login_at'])): ?>
                     <p class="form-message success">
                         Welcome back, <?= e($user['full_name']) ?>!
-                        Your last login was <?= e($_SESSION['previous_login_at']) ?>.
+                        Your previous login was <?= e($_SESSION['previous_login_at']) ?>.
                     </p>
-                    <?php unset($_SESSION['previous_login_at']); // show once per login ?>
+                    <?php unset($_SESSION['previous_login_at']); ?>
                 <?php endif; ?>
-
 
                 <h1>Discover Webinars &amp; Guest Talks</h1>
 
@@ -211,10 +209,6 @@ $posters = ['event_ai.png', 'event_career.png', 'event_marketing.png'];
         <div class="footer-content">
             <span>© 2026 Taylor’s Webinar &amp; Guest Speaker Hub</span>
 
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of use</a>
-            </div>
         </div>
     </footer>
 
