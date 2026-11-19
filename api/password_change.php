@@ -11,6 +11,7 @@ $user = require_login();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('../Student-Portal/User_Profile.php');
 }
+require_valid_csrf();
 
 $currentPassword = $_POST['currentPassword'] ?? '';
 $newPassword     = $_POST['newPassword'] ?? '';
