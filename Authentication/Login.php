@@ -81,6 +81,16 @@ if (current_user()) {
                         name="email"
                         placeholder="alex.morgan@sd.taylors.edu.my"
                         autocomplete="email"
+                                           
+                        <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="alex.morgan@sd.taylors.edu.my"
+                        autocomplete="email"
+                        value="<?= e($_COOKIE['remember_email'] ?? '') ?>"
+                        required
+                    >
                         required
                     >
                 </div>
@@ -128,11 +138,14 @@ if (current_user()) {
 
                 <div class="form-options">
                     <label class="remember-me">
+                                                
                         <input
                             type="checkbox"
                             id="remember-me"
                             name="remember_me"
+                            <?= isset($_COOKIE['remember_email']) ? 'checked' : '' ?>
                         >
+                        
                         <span>Remember me</span>
                     </label>
 
