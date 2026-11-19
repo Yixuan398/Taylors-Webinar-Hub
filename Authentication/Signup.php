@@ -56,6 +56,7 @@ if (current_user()) {
             <h2>Sign Up</h2>
 
             <form id="signupForm" method="post" action="../api/signup.php">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
 
                 <?php if ($error = flash_get('signup_error')): ?>
                     <p class="form-message error"><?= e($error) ?></p>
@@ -160,13 +161,7 @@ if (current_user()) {
             &copy; 2026 Taylor's Webinar &amp; Guest Speaker Hub
         </p>
 
-        <div class="footer-links">
-            <a href="#">Privacy policy</a>
-            <a href="#">Terms of use</a>
-        </div>
     </footer>
-
-    <script src="../assets/js/Signup.js"></script>
 
 </body>
 </html>
