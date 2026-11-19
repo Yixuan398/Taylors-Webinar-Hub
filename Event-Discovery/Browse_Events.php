@@ -66,9 +66,10 @@ function category_class(string $category): string
                         </svg>
                     </a>
 
-                    <a href="../api/logout.php" class="logout-link">
-                        Log out
-                    </a>
+                    <form method="post" action="../api/logout.php" class="logout-form">
+                        <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                        <button type="submit" class="logout-link">Log out</button>
+                    </form>
                 </nav>
             </div>
         </header>
@@ -227,10 +228,6 @@ function category_class(string $category): string
         <div class="footer-content">
             <span>© 2026 Taylor’s Webinar &amp; Guest Speaker Hub</span>
 
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of use</a>
-            </div>
         </div>
     </footer>
 
