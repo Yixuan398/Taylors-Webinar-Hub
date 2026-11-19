@@ -2,6 +2,8 @@
 // Add / Edit Event — create a new event or edit an existing one (admin only).
 require_once __DIR__ . '/../includes/auth.php';
 $admin = require_admin();
+$adminInitials = strtoupper(mb_substr($admin['first_name'] ?: $admin['full_name'], 0, 1)
+    . mb_substr($admin['last_name'] ?? '', 0, 1));
 
 $eventId = (int) ($_GET['id'] ?? 0);
 $event   = null;
@@ -55,10 +57,10 @@ $categories = ['Technology', 'Arts & Culture', 'Community', 'Sports & Wellness']
 
             <div class="header-actions">
                 <div class="admin-profile">
-                    <div class="admin-avatar">ST</div>
+                    <div class="admin-avatar"><?= e($adminInitials) ?></div>
 
                     <div class="admin-info">
-                        <span class="admin-name">Sarah Tan</span>
+                        <span class="admin-name"><?= e($admin['full_name']) ?></span>
                         <span class="admin-role">Administrator</span>
                     </div>
 
@@ -72,9 +74,10 @@ $categories = ['Technology', 'Arts & Culture', 'Community', 'Sports & Wellness']
                     </span>
                 </div>
 
-                <a href="../api/logout.php" class="logout-link">
-                    Log out
-                </a>
+                <form method="post" action="../api/logout.php" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <button type="submit" class="logout-link">Log out</button>
+                </form>
             </div>
 
         </div>
@@ -111,6 +114,7 @@ $categories = ['Technology', 'Arts & Culture', 'Community', 'Sports & Wellness']
             </div>
 
             <form id="eventForm" method="post" action="../api/event_save.php">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
                 <input type="hidden" name="event_id" value="<?= $event ? (int) $event['id'] : 0 ?>">
 
                 <?php if ($error = flash_get('event_form_error')): ?>
@@ -195,6 +199,14 @@ $categories = ['Technology', 'Arts & Culture', 'Community', 'Sports & Wellness']
                         </div>
 
                         <div class="form-group">
+                            <label for="event-end-time">End time</label>
+                            <div class="icon-input">
+                                <input type="time" id="event-end-time" name="end_time"
+                                       value="<?= e(isset($event['end_time']) && $event['end_time'] ? substr($event['end_time'], 0, 5) : '') ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="event-venue">Venue *</label>
                             <input
                                 type="text"
@@ -267,10 +279,6 @@ $categories = ['Technology', 'Arts & Culture', 'Community', 'Sports & Wellness']
     <footer class="site-footer">
         <p>© 2026 Taylor's Webinar &amp; Guest Speaker Hub</p>
 
-        <div class="footer-links">
-            <a href="#">Privacy policy</a>
-            <a href="#">Terms of use</a>
-        </div>
     </footer>
 
 </body>
