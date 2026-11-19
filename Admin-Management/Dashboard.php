@@ -2,6 +2,8 @@
 // Admin Dashboard — list all events with publish/delete actions.
 require_once __DIR__ . '/../includes/auth.php';
 $admin = require_admin();
+$adminInitials = strtoupper(mb_substr($admin['first_name'] ?: $admin['full_name'], 0, 1)
+    . mb_substr($admin['last_name'] ?? '', 0, 1));
 
 $events = db()->query(
     "SELECT e.*,
@@ -47,10 +49,10 @@ $draftCount     = count($events) - $publishedCount;
 
             <div class="header-actions">
                 <div class="admin-profile">
-                    <div class="admin-avatar">ST</div>
+                    <div class="admin-avatar"><?= e($adminInitials) ?></div>
 
                     <div class="admin-info">
-                        <span class="admin-name">Sarah Tan</span>
+                        <span class="admin-name"><?= e($admin['full_name']) ?></span>
                         <span class="admin-role">Administrator</span>
                     </div>
 
@@ -76,9 +78,10 @@ $draftCount     = count($events) - $publishedCount;
                     </button>
                 </div>
 
-                <a href="../api/logout.php" class="logout-link">
-                    Log out
-                </a>
+                <form method="post" action="../api/logout.php" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <button type="submit" class="logout-link">Log out</button>
+                </form>
             </div>
         </div>
     </header>
@@ -217,6 +220,7 @@ $draftCount     = count($events) - $publishedCount;
 
                                     <!-- Publish / unpublish toggles the event status -->
                                     <form method="post" action="../api/event_status.php">
+                                        <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
                                         <input type="hidden" name="event_id"
                                                value="<?= (int) $event['id'] ?>">
                                         <input type="hidden" name="status"
@@ -229,6 +233,7 @@ $draftCount     = count($events) - $publishedCount;
                                     <!-- Delete removes the event and its registrations -->
                                     <form method="post" action="../api/event_delete.php"
                                           onsubmit="return confirm('Delete event: <?= e($event['title']) ?>?');">
+                                        <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
                                         <input type="hidden" name="event_id"
                                                value="<?= (int) $event['id'] ?>">
                                         <button type="submit"
@@ -263,10 +268,6 @@ $draftCount     = count($events) - $publishedCount;
     <footer class="site-footer">
         <p>© 2026 Taylor's Webinar &amp; Guest Speaker Hub</p>
 
-        <div class="footer-links">
-            <a href="#">Privacy policy</a>
-            <a href="#">Terms of use</a>
-        </div>
     </footer>
 
 </body>
