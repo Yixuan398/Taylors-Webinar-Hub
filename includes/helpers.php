@@ -35,6 +35,29 @@ function flash_get(string $key): ?string
     return $message;
 }
 
+/** Create a per-session CSRF token for state-changing forms. */
+function csrf_token(): string
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['csrf_token'];
+}
+
+/** Stop a state-changing request when its CSRF token is missing or invalid. */
+function require_valid_csrf(): void
+{
+    $submitted = $_POST['csrf_token'] ?? '';
+    $known = $_SESSION['csrf_token'] ?? '';
+
+    if (!is_string($submitted) || !is_string($known)
+        || $known === '' || !hash_equals($known, $submitted)) {
+        http_response_code(403);
+        exit('Invalid request token. Please return to the form and try again.');
+    }
+}
+
 /**
  * Format an event date like "Fri, 6 Nov 2026".
  */
