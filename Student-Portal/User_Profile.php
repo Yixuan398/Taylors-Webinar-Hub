@@ -49,9 +49,10 @@ $initials = strtoupper(
                     </svg>
                 </a>
 
-                <a href="../api/logout.php" class="logout-link">
-                    Log out
-                </a>
+                <form method="post" action="../api/logout.php" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <button type="submit" class="logout-link">Log out</button>
+                </form>
             </nav>
         </div>
     </header>
@@ -62,22 +63,26 @@ $initials = strtoupper(
         <aside class="profile-card">
             <div class="profile-avatar-container">
                 <div class="profile-avatar" id="profileAvatar">
-                    <span id="profileInitials"><?= e($initials) ?></span>
-                    <img id="profileImage" alt="Profile photo" hidden>
+                    <span id="profileInitials" <?= !empty($user['photo']) ? 'hidden' : '' ?>><?= e($initials) ?></span>
+                    <img id="profileImage" alt="Profile photo"
+                         src="<?= !empty($user['photo']) ? e('../' . $user['photo']) : '' ?>"
+                         <?= empty($user['photo']) ? 'hidden' : '' ?>>
                 </div>
 
-                <button type="button" class="camera-button"
-                        id="changePhotoButton" aria-label="Change profile photo">
-                    <svg viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.8"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/>
-                        <circle cx="12" cy="13" r="4"/>
-                    </svg>
-                </button>
-
-                <input type="file" id="profilePhotoInput"
-                       accept="image/*" hidden>
+                <form id="photoForm" method="post" enctype="multipart/form-data"
+                      action="../api/profile_photo.php">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <label for="profilePhotoInput" class="camera-button" aria-label="Change profile photo">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/>
+                            <circle cx="12" cy="13" r="4"/>
+                        </svg>
+                    </label>
+                    <input type="file" id="profilePhotoInput" name="profile_photo"
+                           accept="image/jpeg,image/png,image/webp" hidden>
+                </form>
             </div>
 
             <h1 id="profileDisplayName"><?= e($user['full_name']) ?></h1>
@@ -90,20 +95,25 @@ $initials = strtoupper(
             <?php if ($error = flash_get('password_error')): ?>
                 <p class="form-message error"><?= e($error) ?></p>
             <?php endif; ?>
+            <?php if ($error = flash_get('photo_error')): ?>
+                <p class="form-message error"><?= e($error) ?></p>
+            <?php endif; ?>
+            <?php if ($notice = flash_get('photo_notice')): ?>
+                <p class="form-message success"><?= e($notice) ?></p>
+            <?php endif; ?>
 
-            <p class="profile-email" id="profileDisplayEmail">
-                alexlee@student.taylors.edu.my
-            </p>
-            <p class="joined-date">Joined since Sep 2025</p>
+            <p class="profile-email" id="profileDisplayEmail"><?= e($user['email']) ?></p>
+            <p class="joined-date">Joined since <?= e(date('M Y', strtotime($user['created_at']))) ?></p>
 
             <button type="button" class="change-password-button"
                     id="changePasswordButton">
                 Change Password
             </button>
 
-            <a href="../Authentication/Login.php" class="profile-logout-button">
-                Logout
-            </a>
+            <form method="post" action="../api/logout.php">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                <button type="submit" class="profile-logout-button">Logout</button>
+            </form>
         </aside>
 
         <!-- User Details -->
@@ -120,6 +130,7 @@ $initials = strtoupper(
             </div>
 
             <form id="profileForm" method="post" action="../api/profile_update.php">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
 
                 <!-- Personal Information -->
                 <section class="information-section">
@@ -145,9 +156,9 @@ $initials = strtoupper(
                         </div>
 
                         <div class="field">
-                            <label for="lastName">Last Name <span>*</span></label>
+                            <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" name="lastName"
-                                   value="<?= e($user['last_name'] ?? '') ?>" required disabled>
+                                   value="<?= e($user['last_name'] ?? '') ?>" disabled>
                         </div>
 
                         <div class="field">
@@ -165,40 +176,33 @@ $initials = strtoupper(
                     </div>
                 </section>
 
-                <!-- Academic Information -->
                 <section class="information-section academic-section">
                     <h3>ACADEMIC INFORMATION</h3>
-
                     <div class="information-grid">
                         <div class="field">
                             <label for="studentId">Student ID</label>
-                            <input type="text" id="studentId"
-                                   value="123456" disabled>
+                            <input type="text" id="studentId" name="studentId"
+                                   value="<?= e($user['student_id'] ?? '') ?>" maxlength="30" disabled>
                         </div>
-
                         <div class="field">
                             <label for="faculty">Faculty</label>
-                            <input type="text" id="faculty"
-                                   value="School of Computing" disabled>
+                            <input type="text" id="faculty" name="faculty"
+                                   value="<?= e($user['faculty'] ?? '') ?>" maxlength="100" disabled>
                         </div>
-
                         <div class="field">
                             <label for="intake">Intake</label>
-                            <input type="text" id="intake"
-                                   value="September 2025" disabled>
+                            <input type="text" id="intake" name="intake"
+                                   value="<?= e($user['intake'] ?? '') ?>" maxlength="50" disabled>
                         </div>
-
                         <div class="field">
                             <label for="programme">Programme</label>
-                            <input type="text" id="programme"
-                                   value="Bachelor of Computer Science (Hons)"
-                                   disabled>
+                            <input type="text" id="programme" name="programme"
+                                   value="<?= e($user['programme'] ?? '') ?>" maxlength="150" disabled>
                         </div>
-
                         <div class="field">
                             <label for="yearOfStudy">Year of Study</label>
-                            <input type="text" id="yearOfStudy"
-                                   value="Year 2" disabled>
+                            <input type="text" id="yearOfStudy" name="yearOfStudy"
+                                   value="<?= e($user['year_of_study'] ?? '') ?>" maxlength="30" disabled>
                         </div>
                     </div>
                 </section>
@@ -222,6 +226,7 @@ $initials = strtoupper(
     <!-- Change Password Dialog -->
     <dialog id="passwordDialog" class="password-dialog">
         <form id="passwordForm" method="post" action="../api/password_change.php">
+            <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
             <div class="dialog-header">
                 <h2>Change Password</h2>
                 <button type="button" id="closePasswordDialog"
@@ -260,10 +265,6 @@ $initials = strtoupper(
         <div class="footer-content">
             <span>© 2026 Taylor’s Webinar &amp; Guest Speaker Hub</span>
 
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of use</a>
-            </div>
         </div>
     </footer>
 
