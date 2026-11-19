@@ -124,3 +124,15 @@ Taylors-Webinar/
 - `session_regenerate_id(true)` on login prevents session fixation.
 - Role-based access control: `require_login()` / `require_admin()` guards.
 - Server-side validation mirrors the client-side validation on every form.
+- ## Sessions & cookies
+
+- **Sessions**: login state is stored server-side in `$_SESSION` (user id);
+  every protected page checks it via `require_login()` / `require_admin()`.
+  PHP links the session to the browser through the `PHPSESSID` cookie.
+- **Cookies**:
+  - `remember_email` — when "Remember me" is ticked at login, the email is
+    stored for 30 days and prefilled on the login form (never the password)
+  - `last_login_at` — the login timestamp; the home page greets returning
+    users with "Welcome back, your last login was …"
+  - both are set with `HttpOnly` and `SameSite=Lax` flags
+
