@@ -5,6 +5,11 @@ require_once __DIR__ . '/../includes/auth.php';
 if (current_user()) {
     redirect(is_admin() ? '../Admin-Management/Dashboard.php' : '../Event-Discovery/Home.php');
 }
+$rememberCookie = $_COOKIE['remember_email'] ?? null;
+$rememberEmail = is_string($rememberCookie)
+    && filter_var($rememberCookie, FILTER_VALIDATE_EMAIL)
+    ? $rememberCookie
+    : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +68,7 @@ if (current_user()) {
             </p>
 
             <form id="loginForm" method="post" action="../api/login.php">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
 
                 <?php if ($notice = flash_get('login_notice')): ?>
                     <p class="form-message success"><?= e($notice) ?></p>
@@ -81,16 +87,7 @@ if (current_user()) {
                         name="email"
                         placeholder="alex.morgan@sd.taylors.edu.my"
                         autocomplete="email"
-                                           
-                        <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="alex.morgan@sd.taylors.edu.my"
-                        autocomplete="email"
-                        value="<?= e($_COOKIE['remember_email'] ?? '') ?>"
-                        required
-                    >
+                        value="<?= e($rememberEmail) ?>"
                         required
                     >
                 </div>
@@ -138,36 +135,21 @@ if (current_user()) {
 
                 <div class="form-options">
                     <label class="remember-me">
-                                                
                         <input
                             type="checkbox"
                             id="remember-me"
                             name="remember_me"
-                            <?= isset($_COOKIE['remember_email']) ? 'checked' : '' ?>
+                            <?= $rememberEmail !== '' ? 'checked' : '' ?>
                         >
-                        
                         <span>Remember me</span>
                     </label>
 
-                    <a href="#" class="forgot-password">
-                        Forgot password?
-                    </a>
                 </div>
 
                 <button type="submit" class="login-button">
                     Login
                 </button>
 
-                <button type="submit" class="admin-button" form="adminLoginForm">
-                    Admin
-                </button>
-
-            </form>
-
-            <!-- One-click demo login for the admin account -->
-            <form id="adminLoginForm" method="post" action="../api/login.php" hidden>
-                <input type="hidden" name="email" value="admin@taylors.edu.my">
-                <input type="hidden" name="password" value="Admin@123">
             </form>
 
                 <p class="signup-prompt">
@@ -185,10 +167,6 @@ if (current_user()) {
                 © 2026 Taylor's Webinar &amp; Guest Speaker Hub
             </p>
 
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of use</a>
-            </div>
         </div>
     </footer>
 
