@@ -84,6 +84,16 @@ $posters = ['event_ai.png', 'event_career.png', 'event_marketing.png'];
                     <p class="form-message success"><?= e($notice) ?></p>
                 <?php endif; ?>
 
+                <?php // "Last login" is passed from a cookie via the session (see api/login.php) ?>
+                <?php if (!empty($_SESSION['previous_login_at'])): ?>
+                    <p class="form-message success">
+                        Welcome back, <?= e($user['full_name']) ?>!
+                        Your last login was <?= e($_SESSION['previous_login_at']) ?>.
+                    </p>
+                    <?php unset($_SESSION['previous_login_at']); // show once per login ?>
+                <?php endif; ?>
+
+
                 <h1>Discover Webinars &amp; Guest Talks</h1>
 
                 <p class="hero-description">
