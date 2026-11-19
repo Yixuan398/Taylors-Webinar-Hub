@@ -3,6 +3,9 @@
 require_once __DIR__ . '/../includes/auth.php';
 $user = require_login();
 
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+
 $stmt = db()->prepare(
     "SELECT e.*, r.created_at AS joined_at
      FROM event_registrations r
@@ -157,7 +160,10 @@ function render_event_card(array $event): void
                     </svg>
                 </a>
 
-                <a href="../api/logout.php" class="logout-link">Log out</a>
+                <form method="post" action="../api/logout.php" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <button type="submit" class="logout-link">Log out</button>
+                </form>
             </nav>
         </div>
     </header>
@@ -169,11 +175,11 @@ function render_event_card(array $event): void
 
             <div class="event-tabs">
                 <button type="button" class="tab-button active" data-tab="upcoming">
-                    Upcoming Events
+                    Upcoming Events (<?= count($upcoming) ?>)
                 </button>
 
                 <button type="button" class="tab-button" data-tab="past">
-                    Past Events
+                    Past Events (<?= count($past) ?>)
                 </button>
             </div>
 
@@ -223,10 +229,9 @@ function render_event_card(array $event): void
                         </select>
 
                         <select id="calendarYear" aria-label="Year">
-                            <option value="2025">2025</option>
-                            <option value="2026" selected>2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
+                            <?php for ($year = (int) date('Y') - 2; $year <= (int) date('Y') + 5; $year++): ?>
+                                <option value="<?= $year ?>" <?= $year === (int) date('Y') ? 'selected' : '' ?>><?= $year ?></option>
+                            <?php endfor; ?>
                         </select>
                     </div>
 
@@ -249,16 +254,10 @@ function render_event_card(array $event): void
                 <div id="calendarDays" class="calendar-days"></div>
             </div>
 
-            <!-- Selected Day -->
+            <!-- Selected Day; populated from the signed-in user's registrations. -->
             <div class="selected-day-card">
-                <h3 id="selectedDayTitle">Tu, Nov 9</h3>
-
-                <div id="selectedDayEvents" class="selected-day-events">
-                    <div class="calendar-event">
-                        <strong>Build Together: Campus Hackathon</strong>
-                        <span>◷ 9:00 am</span>
-                    </div>
-                </div>
+                <h3 id="selectedDayTitle"></h3>
+                <div id="selectedDayEvents" class="selected-day-events"></div>
             </div>
         </aside>
 
@@ -269,10 +268,6 @@ function render_event_card(array $event): void
         <div class="footer-content">
             <span>© 2026 Taylor’s Webinar &amp; Guest Speaker Hub</span>
 
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of use</a>
-            </div>
         </div>
     </footer>
 
